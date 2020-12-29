@@ -56,5 +56,10 @@ module.exports = {
                 }
             }
         }
+    },
+    devServer: {
+        host: 'localhost',
+        publicPath: '/',
+        port: 3002
     }
 };
