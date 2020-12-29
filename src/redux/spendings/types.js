@@ -1,0 +1,1 @@
+export const SET_SPENDING_DATA = 'SET_SPENDING_DATA'

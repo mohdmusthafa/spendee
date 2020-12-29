@@ -1,10 +1,33 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Button, Input, Dropdown, Grid, Header, Icon } from 'semantic-ui-react'
+import { DateInput } from 'semantic-ui-calendar-react'
+import { setSpendingData } from '../../redux/spendings/'
 
 function AddSpending() {
+    const state = useSelector(state => state.spendings)
+    const {
+        Add_spending_type,
+        Add_spending_date,
+        Add_spending_amount
+    } = state
+    const dispatch = useDispatch()
+
     const inputStyles = {
         width: 200,
         marginBottom: 10
+    }
+
+    const handleAmountChange = e => {
+        dispatch(setSpendingData("Add_spending_amount", e.target.value))
+    }
+
+    const handleDateChange = (e, { name, value }) => {
+        dispatch(setSpendingData("Add_spending_date", value ))
+    }
+
+    const handleDropdownChange = (e, { value }) => {
+        dispatch(setSpendingData("Add_spending_type", value))
     }
     return (
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle' >
@@ -15,25 +38,42 @@ function AddSpending() {
                 <Dropdown
                     placeholder="Spending Type"
                     selection
+                    value={Add_spending_type}
                     style={inputStyles}
                     options={[
                         {
                             key: 'Food',
-                            text: 'Food'
+                            text: 'Food',
+                            value: 'Food'
                         },
                         {
                             key: 'Travel',
-                            text: 'Travel'
+                            text: 'Travel',
+                            value: 'Travel'
                         }
                     ]}
+                    onChange={handleDropdownChange}
                 />
                 <br />
-                <Input type='date' style={inputStyles} placeholder='Select a date'  />
-                <Button type='button'style={{marginLeft: 10}} icon><Icon name='calendar' /></Button>
+                <DateInput
+                    name="date"
+                    placeholder="Spending Date"
+                    style={inputStyles}
+                    value={Add_spending_date}
+                    iconPosition="left"
+                    onChange={handleDateChange}
+                    closable
+                />
+                <Input
+                    style={inputStyles}
+                    placeholder="Enter the amount"
+                    value={Add_spending_amount}
+                    onChange={handleAmountChange}
+                />
                 <br />
-                <Input style={inputStyles} placeholder="Enter the amount" />
-                <br />
+
                 <Button secondary>Add Spending</Button>
+
             </Grid.Column>
         </Grid>
     )

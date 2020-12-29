@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import testReducer from "./test_reducer"
+import spendingsReducer from './spendings/reducer'
 
 const rootReducer = combineReducers({
-    test: testReducer
+    spendings: spendingsReducer
 })
 
 export default rootReducer
