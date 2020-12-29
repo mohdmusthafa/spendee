@@ -6,8 +6,7 @@ const middleware = [thunk,]
 const enhancers = [];
 
 if(process.env.NODE_ENV === 'development'){
-    const logger = createLogger()
-    middleware.push(logger)
+    middleware.push(createLogger())
     const reduxDevToolExtension = window.__REDUX_DEVTOOLS_EXTENSION__
     if(typeof reduxDevToolExtension === 'function'){
         enhancers.push(reduxDevToolExtension())
