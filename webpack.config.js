@@ -1,4 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const path = require('path')
 
 module.exports = {
@@ -11,6 +13,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './public/index.html',
         }),
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+      chunkFilename: '[id].css',
+        })
     ],
     resolve: {
         modules: [__dirname, 'src', 'node_modules'],
@@ -25,34 +31,57 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            publicPath: ''
+                        }
+                    },
+                    {
+                        loader: 'css-loader'
+                    }
+                ]
             },
             {
                 test: /\.(jpg|png|svg)$/,
                 use: ['url-loader']
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                  // Creates `style` nodes from JS strings
+                  "style-loader",
+                  // Translates CSS into CommonJS
+                  "css-loader",
+                  // Compiles Sass to CSS
+                  "sass-loader",
+                ],
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'fonts/'
+                        }
+                    }
+                ]
             }
         ],
     },
     optimization: {
+        minimizer: [
+            new CssMinimizerPlugin()
+        ],
         splitChunks: {
-            chunks: 'async',
-            minSize: 20000,
-            minRemainingSize: 0,
-            maxSize: 2097152, //2 MB max size
-            minChunks: 1,
-            maxAsyncRequests: 30,
-            maxInitialRequests: 30,
-            enforceSizeThreshold: 50000,
             cacheGroups: {
-                defaultVendors: {
+                commons: {
                     test: /[\\/]node_modules[\\/]/,
-                    priority: -10,
-                    reuseExistingChunk: true
-                },
-                default: {
-                    minChunks: 2,
-                    priority: -20,
-                    reuseExistingChunk: true
+                    name: "vendors",
+                    chunks: "all"
                 }
             }
         }
