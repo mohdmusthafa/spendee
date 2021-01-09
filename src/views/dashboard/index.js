@@ -1,10 +1,14 @@
 import React from 'react'
-import { Container } from 'semantic-ui-react'
 import AddSpending from './AddSpending'
+import { ToastContainer } from 'react-toastify';
+
 
 function Dashboard(){
     return (
-        <AddSpending />
+        <div>
+            <AddSpending />
+            <ToastContainer />
+        </div>
     )
 }
 

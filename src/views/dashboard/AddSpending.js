@@ -29,6 +29,10 @@ function AddSpending() {
     const handleDropdownChange = (e, { value }) => {
         dispatch(setSpendingData("Add_spending_type", value))
     }
+
+    const addSpendingHandler = () => {
+        dispatch(addSpendingData())
+    }
     return (
         <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle' >
             <Grid.Column style={{ maxWidth: 450 }}>
@@ -73,7 +77,7 @@ function AddSpending() {
                 />
                 <br />
 
-                <Button secondary onClick={() => dispatch(addSpendingData())}>Add Spending</Button>
+                <Button secondary onClick={addSpendingHandler}>Add Spending</Button>
 
             </Grid.Column>
         </Grid>
