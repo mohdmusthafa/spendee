@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Input, Dropdown, Grid, Header, Icon } from 'semantic-ui-react'
 import { DateInput } from 'semantic-ui-calendar-react'
-import { setSpendingData } from '../../redux/spendings/'
+import { addSpendingData, setSpendingData } from '../../redux/spendings/'
 
 function AddSpending() {
     const state = useSelector(state => state.spendings)
@@ -73,7 +73,7 @@ function AddSpending() {
                 />
                 <br />
 
-                <Button secondary>Add Spending</Button>
+                <Button secondary onClick={() => dispatch(addSpendingData())}>Add Spending</Button>
 
             </Grid.Column>
         </Grid>

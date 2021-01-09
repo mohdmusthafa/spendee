@@ -8,3 +8,8 @@ export const setSpendingData = (name, value) => (dispatch) => {
         }
     })
 }
+
+export const addSpendingData = () => async (dispatch, getState) => {
+    const { spendings } = getState();
+    console.log(spendings)
+}
