@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Button, Input, Dropdown, Grid, Header } from 'semantic-ui-react'
 import { DateInput } from 'semantic-ui-calendar-react'
@@ -12,6 +12,12 @@ function AddSpending() {
         Add_spending_amount
     } = spendings
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        setTimeout(() => {
+            
+        }, 10000);
+    }, [])
 
     const inputStyles = {
         width: 200,
