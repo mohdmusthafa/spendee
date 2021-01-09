@@ -7,7 +7,7 @@ function Dashboard(){
     return (
         <div>
             <AddSpending />
-            <ToastContainer />
+            <ToastContainer autoClose={1000} hideProgressBar />
         </div>
     )
 }

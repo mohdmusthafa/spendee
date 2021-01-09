@@ -1,16 +1,16 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Button, Input, Dropdown, Grid, Header, Icon } from 'semantic-ui-react'
+import { Button, Input, Dropdown, Grid, Header } from 'semantic-ui-react'
 import { DateInput } from 'semantic-ui-calendar-react'
 import { addSpendingData, setSpendingData } from '../../redux/spendings/'
 
 function AddSpending() {
-    const state = useSelector(state => state.spendings)
+    const spendings = useSelector(state => state.spendings)
     const {
         Add_spending_type,
         Add_spending_date,
         Add_spending_amount
-    } = state
+    } = spendings
     const dispatch = useDispatch()
 
     const inputStyles = {
