@@ -23,7 +23,7 @@ export const addSpendingData = () => async (dispatch, getState) => {
         const req_params = {
             spending_type: Add_spending_type,
             spending_date: Add_spending_date,
-            saved_amout: Add_spending_amount
+            saved_amount: Number(Add_spending_amount) //Convert to number from string input
         }
 
         await axios.post(API + '/add', req_params)
