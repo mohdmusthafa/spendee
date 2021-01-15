@@ -1,24 +1,30 @@
 import { hot } from 'react-hot-loader/root'
-import React, { lazy, Suspense } from 'react'
+import React, { Suspense } from 'react'
 import 'semantic-ui-css/semantic.min.css'
 import 'react-toastify/dist/ReactToastify.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import routes from './routes'
 import Loading from './components/Loading'
-
-
-const Dashboard = lazy(() => import('./views/dashboard'))
 
 
 function App() {
     return (
         <Suspense fallback={<Loading />}>
-            <Router>
+            <BrowserRouter>
                 <Switch>
-                    <Route exact path="/" component={Dashboard} />
-                    <Route exact path="/add-spending" component={Dashboard} />
+
+                    {routes.map((route, i) =>
+                        <Route key={i} exact={route.subRoutes.some(r => r.exact)} path={route.subRoutes.map(r => r.path)}>
+                            <route.layout>
+                                {route.subRoutes.map((subRoute, i) =>
+                                    <Route key={i} {...subRoute} />
+                                )}
+                            </route.layout>
+                        </Route>
+                    )}
                 </Switch>
-            </Router>
+            </BrowserRouter>
         </Suspense>
     )
 }

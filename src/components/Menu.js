@@ -7,7 +7,7 @@ function Menu() {
     const history = useHistory();
 
     const showAddSpendingHandler = () => {
-        history.push("/add-spending")
+        history.push("/spendings/add")
     }
     return (
         <Fab icon={<AiOutlineMenu />}>
