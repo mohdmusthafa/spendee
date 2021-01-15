@@ -8,6 +8,10 @@ const routes = [
         layout: Dashboard,
         subRoutes: [
             {
+                path: "/spendings",
+                component: Dashboard
+            },
+            {
                 path: "/spendings/add",
                 component: Dashboard
             }
