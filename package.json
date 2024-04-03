@@ -16,7 +16,7 @@
     "@babel/preset-react": "7.12.10",
     "babel-loader": "8.2.2",
     "cross-env": "7.0.3",
-    "css-loader": "5.0.1",
+    "css-loader": "6.11.0",
     "css-minimizer-webpack-plugin": "1.1.5",
     "file-loader": "6.2.0",
     "html-webpack-plugin": "4.5.0",
